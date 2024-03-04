@@ -15,13 +15,19 @@ const scrap = async (url) => {
   // Navigate the page to a URL
   await page.goto(url);
 
-  const resultado = await page.evaluate(() => {
+  const conteudo = await page.evaluate(() => {
     return document.querySelector(".entry-content").innerHTML;
+  });
+
+  const titulo = await page.evaluate(() => {
+    return document.querySelector(".epheader").innerHTML;
   });
 
   await browser.close();
 
+  let resultado = titulo + conteudo
   // Print the full title
+  
   return resultado;
 };
 
@@ -42,7 +48,7 @@ app.get("/", async (req, res) => {
 
 app.get("/novel", async (req, res) => {
   const url = req.query.url;
-  const text = await scrap(url);
+  let text= await scrap(url);
   return res.status(200).json(text);
 });
 

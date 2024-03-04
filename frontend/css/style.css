@@ -4,9 +4,8 @@
     padding: 0;
 }
 .container{
-    width: 100vw;
     height: 100vh;
-    background-color: #1e1e1e;
+    background-color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +14,7 @@
 }
 
 #url{
-    width: 80vw;
+    width: 100px;
     padding: 20px;
     background-color: #252526;
     border: 0;
@@ -36,6 +35,40 @@
     border-radius: 20px;
 }
 
+.controller{
+    display: none;
+    justify-content: space-between;
+    padding: 1vh 12vw;
+    font-size: large;
+    font-weight: 900;
+    background-color: #000;
+    color: #ccc;
+    
+}
+
+.controller div{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #252526;
+}
+
+.entry-title{
+    text-align: center;
+    padding: 150px 0px 30px;
+}
+
+.cat-series{
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.entry-info{
+    display: none;
+}
 
 #resultado {
     text-align: justify;
@@ -45,8 +78,16 @@
     font-size: 2vw;
 }
 
-#resultado > p {
-  padding: 3vh 12vw;
+#resultado p {
+  padding: 1vh 12vw;
+}
+
+#resultado p::before{
+    content: '‎ ‎‎ ‎ ‎ ‎ ‎ ';
+}
+
+#resultado > :not(p, h1, .cat-series, article, #container){
+    display: none;
 }
 
 .tabulacao{
