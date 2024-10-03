@@ -7,7 +7,7 @@ const fetchText = async (url) => {
 document.querySelector("#btn").addEventListener("click", async () => {
   let url = document.querySelector("#url");
   let resultado = await fetchText(url.value)
-  document.querySelector(".container").style.display = "none";
+  document.querySelector("#home").style.display = "none";
   document.querySelector(".controller").style.display = "flex";
   document.querySelector("#resultado").innerHTML = resultado;
 });

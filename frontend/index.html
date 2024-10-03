@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
-        <img src="tbate.png" alt="">
-        <input type="text" id="url"></input>
-        <button id="btn">converter</button>
-    </div>
+<body class="h-full dark">
+    <div id="home" class="flex min-h-full dark:bg-gray-900 flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="tbate.png" alt="">
+            <h2 class="mt-10 text-center dark:text-white text-2xl font-bold leading-9 tracking-tight text-gray-900">The Beginning After the End</h2>
+        </div>
+      
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div class="space-y-6">
+            <div>
+              <label for="url" class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Capitulo</label>
+              <div class="mt-2">
+                <input id="url" name="url" type="text" autocomplete="capitulo" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+            </div>
+      
+            <div>
+              <button type="submit"  id="btn" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Converter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <div class="controller">
         <div class="last"><</div>
         <div class="prox">></div>
