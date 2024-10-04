@@ -1,13 +1,25 @@
 const fetchText = async (url) => {
   const link = `http://localhost:3000/novel?url=https://centralnovel.com/the-beginning-after-the-end-capitulo-${url}`
   try {
+    document.querySelector("#loader").classList.remove("hidden")
     const response = await fetch(link);
   
     const json = await response.json();
     if (json.name) {
       throw new Error;
     }
-    return json
+ 
+    await fetch(`novel.html`)
+    .then(response => response.text())
+    .then(novel => {
+      const parser = new DOMParser();
+      const html = parser.parseFromString(novel, 'text/html');
+      html.querySelector("#novel").innerHTML = json;
+
+      document.querySelector("#resultado").innerHTML = html.body.firstChild.outerHTML
+
+    });
+
   } catch (error) {
     
     await fetch(`error.html`)
@@ -16,29 +28,26 @@ const fetchText = async (url) => {
       document.querySelector("#resultado").innerHTML = errorHTML;
     });
     
+  }finally{
+    document.querySelector("#loader").classList.add("hidden")
   }
 }
 
-document.querySelector("#btn").addEventListener("click", async () => {
+async function pesquisar(){
   let url = document.querySelector("#url");
-  let resultado = await fetchText(url.value)
+  await fetchText(url.value)
 
-  if(document.querySelector("#resultado").innerHTML == "") { document.querySelector("#resultado").innerHTML = resultado; }
   document.querySelector("#home").style.display = "none";
-  document.querySelector(".controller").style.display = "flex";
+  document.querySelector("#resultado").classList.remove("hidden")
   
-});
+};
 
-document.querySelector(".prox").addEventListener("click", async () => {
+async function proximo() {
   url.value++
-  let resultado = await fetchText(url.value)
-  
-  document.querySelector("#resultado").innerHTML = resultado;
-})
+  await fetchText(url.value)
+}
 
-document.querySelector(".last").addEventListener("click", async () => {
+async function ultimo(){
   url.value--
-  let resultado = await fetchText(url.value)
-
-  document.querySelector("#resultado").innerHTML = resultado;
-})
+  await fetchText(url.value)
+}
