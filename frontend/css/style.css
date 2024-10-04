@@ -65,7 +65,7 @@
     content: '‎ ‎‎ ‎ ‎ ‎ ‎ ';
 }
 
-#resultado > :not(p, h1, .cat-series, article, #container){
+#resultado > :not(p, h1, .cat-series, article, #container, main){
     display: none;
 }
 

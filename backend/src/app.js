@@ -5,30 +5,32 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 import puppeteer from "puppeteer";
-//const puppeteer = require("puppeteer");
 
 const scrap = async (url) => {
-  // Launch the browser and open a new blank page
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  try {
+    // Launch the browser and open a new blank page
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-  // Navigate the page to a URL
-  await page.goto(url);
+    // Navigate the page to a URL
+    await page.goto(url);
+   
+    const conteudo = await page.evaluate(() => {
+      return document.querySelector(".entry-content").innerHTML;
+    });
 
-  const conteudo = await page.evaluate(() => {
-    return document.querySelector(".entry-content").innerHTML;
-  });
+    const titulo = await page.evaluate(() => {
+      return document.querySelector(".epheader").innerHTML;
+    });
 
-  const titulo = await page.evaluate(() => {
-    return document.querySelector(".epheader").innerHTML;
-  });
+    await browser.close();
 
-  await browser.close();
-
-  let resultado = titulo + conteudo
-  // Print the full title
-  
-  return resultado;
+    let resultado = titulo + conteudo
+    return resultado;
+  } catch (error) {
+    console.error('Erro na requisição:', error);
+    return error
+  }
 };
 
 
@@ -42,14 +44,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", async (req, res) => {
-  return res.json("hello world");
-});
-
 app.get("/novel", async (req, res) => {
   const url = req.query.url;
   let text= await scrap(url);
-  return res.status(200).json(text);
+  return res.json(text);
 });
 
 app.listen(port, () => console.log("server is running on port ", port));
