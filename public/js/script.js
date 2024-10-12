@@ -3,8 +3,8 @@ const fetchText = async (url) => {
   try {
     document.querySelector("#loader").classList.remove("hidden")
     const response = await fetch(link);
-  
     const json = await response.json();
+    console.log(json)
     if (json.name) {
       throw new Error;
     }
