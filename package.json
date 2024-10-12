@@ -8,9 +8,9 @@
   },
   "type": "module",
   "scripts": {
-    "build": "pm2 start backend/src/app.js",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "build": "echo 'nothing to build'",
+    "start": "node api/app.js",
+    "dev": "nodemon api/app.js"
   },
   "keywords": [],
   "author": "",
