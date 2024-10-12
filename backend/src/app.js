@@ -44,6 +44,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", async (req, res) => {
+  return res.json("hello world");
+});
+
 app.get("/novel", async (req, res) => {
   const url = req.query.url;
   let text= await scrap(url);
