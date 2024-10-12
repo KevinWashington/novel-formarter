@@ -36,21 +36,22 @@ const scrap = async (url) => {
 
 // Adicionar os cabeçalhos Access-Control-Allow-Origin
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  const allowedOrigins = ['http://127.0.0.1:5500', 'https://novel-formarter.vercel.app'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
 app.get("/", async (req, res) => {
-  return res.json("hello world");
+  res.status(200).json({ message: 'Hello, World!' });
 });
 
 app.get("/novel", async (req, res) => {
   const url = req.query.url;
-  let text= await scrap(url);
+  let text = await scrap(url);
   return res.json(text);
 });
 
