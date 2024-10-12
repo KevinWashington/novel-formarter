@@ -50,7 +50,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/novel", async (req, res) => {
-  const url = req.query.url;
+  const url = "https://centralnovel.com/the-beginning-after-the-end-capitulo-~"+ req.query.url;
   let text = await scrap(url);
   return res.json(text);
 });
