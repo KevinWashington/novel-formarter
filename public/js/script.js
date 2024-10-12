@@ -1,5 +1,5 @@
 const fetchText = async (url) => {
-  const link = `http://localhost:3000/novel?url=https://centralnovel.com/the-beginning-after-the-end-capitulo-${url}`
+  const link = `https://novel-formarter.vercel.app:3000/novel?url=https://centralnovel.com/the-beginning-after-the-end-capitulo-${url}`
   try {
     document.querySelector("#loader").classList.remove("hidden")
     const response = await fetch(link);
