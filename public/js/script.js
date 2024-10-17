@@ -1,19 +1,22 @@
 const fetchText = async (url) => {
-  const link = `https://novel-formarter.vercel.app/api/novel?url=${url}`
+  //const link = `https://novel-formarter.vercel.app/api/novel?url=${url}`
+  const link = `http://127.0.0.1:3000/novel?url=${url}`
+  document.querySelector("#loader").classList.remove("hidden")
+  
   try {
-    document.querySelector("#loader").classList.remove("hidden")
     const response = await fetch(link);
   
-    const json = await response.json();
-    if (json.name) {
-      throw new Error;
+    if (!response.ok) {
+      throw new Error('Erro ao buscar dados');
     }
- 
+    const json = await response.json();
+
     await fetch(`novel.html`)
     .then(response => response.text())
     .then(novel => {
       const parser = new DOMParser();
       const html = parser.parseFromString(novel, 'text/html');
+      console.log(json)
       html.querySelector("#novel").innerHTML = json;
 
       document.querySelector("#resultado").innerHTML = html.body.firstChild.outerHTML
@@ -21,7 +24,6 @@ const fetchText = async (url) => {
     });
 
   } catch (error) {
-    
     await fetch(`error.html`)
     .then(response => response.text())
     .then(errorHTML => {
